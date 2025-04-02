@@ -60,8 +60,8 @@ $duration: 0.15s;
     span,
     path,
     svg {
-        display: inline-block;
         transition: all $duration ease-in-out;
+        line-height: 1;
     }
 
     &:hover {
