@@ -3,7 +3,7 @@ import './ProductCard.scss';
 import { useState } from 'react';
 import cn from 'classnames';
 
-export default function ProductCard({ name, imageUrl, price, types, size }) {
+export default function ProductCard({ title, imageUrl, price, types, sizes }) {
     const sizeName = ['тонкое', 'традиционное'];
 
     const [count, setCount] = useState(0);
@@ -17,7 +17,7 @@ export default function ProductCard({ name, imageUrl, price, types, size }) {
     return (
         <div className="card">
             <img src={imageUrl} alt="gg" />
-            <p className="nameP">{name}</p>
+            <p className="nameP">{title}</p>
             <div className="presc">
                 <ul className="weight">
                     {types.map((item, index) => (
@@ -27,7 +27,7 @@ export default function ProductCard({ name, imageUrl, price, types, size }) {
                     ))}
                 </ul>
                 <ul className="size">
-                    {size.map((item, index) => (
+                    {sizes.map((item, index) => (
                         <li key={index} onClick={() => setSizeP(index)} className={sizeP === index ? 'active' : ''}>
                             {item} см
                         </li>
