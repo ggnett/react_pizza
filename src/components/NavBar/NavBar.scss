@@ -5,9 +5,11 @@
     font-size: 16px;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 
     .categories {
         display: flex;
+        flex-wrap: wrap;
         li {
             background-color: #f9f9f9;
             padding: 13px 30px;

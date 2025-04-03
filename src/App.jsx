@@ -1,14 +1,14 @@
 import './normalize.scss';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
-import ProductCard from './components/ProductCard/ProductCard'
+import Content from './components/Content/Content';
 
 function App() {
     return (
-        <div class="wrapper">
+        <div className="wrapper">
             <Header />
             <NavBar />
-            <ProductCard />
+            <Content />
         </div>
     );
 }

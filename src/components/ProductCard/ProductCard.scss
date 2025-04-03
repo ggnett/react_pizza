@@ -4,7 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid orangered;
+    margin-bottom: 60px;
+    // margin-right: 5px;
 
     img {
         margin-left: 15px;
@@ -38,7 +39,6 @@
         font-weight: bold;
         ul {
             display: flex;
-            // justify-content: space-around;
             gap: 5px;
 
             li {
@@ -69,20 +69,29 @@
 
     .ad {
         width: 132px;
-        // height: 40px;
-        background-color: orangered;
+        height: 30px;
+        background-color: white;
         border-radius: 30px;
-        color: white;
-        padding: 10px 0px;
+        color: orangered;
+        padding: 10px 5px;
         line-height: 1;
         font-size: 16px;
         font-weight: 700;
         text-align: center;
         vertical-align: middle;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 2px solid orangered;
 
         &:hover {
-            background-color: lighten($color: orangered, $amount: 5%);
+            background-color: orangered;
+            color: white;
+        }
+        &:active {
+            box-shadow: 1px 1px 1px 1px black;
         }
     }
 
@@ -93,5 +102,22 @@
 
     li.active {
         background-color: white;
+    }
+
+    .hide {
+        opacity: 0;
+        width: 1px;
+        display: none;
+    }
+
+    .counter {
+        padding-left: 5px;
+        background-color: orangered;
+        border-radius: 15px;
+        width: 20px;
+        text-align: center;
+        font-size: 18px;
+        padding: 2px;
+        color: white;
     }
 }
