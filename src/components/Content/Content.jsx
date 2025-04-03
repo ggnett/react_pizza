@@ -2,15 +2,23 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import './Content.scss';
 
-import pizzas from '../../assets/pizza.json';
-
 export default function Content() {
+    const [list, setList] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items')
+            .then((res) => res.json())
+            .then((items) => {
+                setList(items);
+            });
+    }, []);
+
     return (
         <div className="content">
             <p className="title">Все пиццы</p>
             <div className="cardPlace">
-                {pizzas.map((item, index) => (
-                    <ProductCard key={item.id} name={item.name} imageUrl={item.imageUrl} price={item.price} />
+                {list.map((item, index) => (
+                    <ProductCard key={index} {...item} />
                 ))}
             </div>
         </div>

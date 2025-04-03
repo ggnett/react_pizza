@@ -3,8 +3,12 @@ import './ProductCard.scss';
 import { useState } from 'react';
 import cn from 'classnames';
 
-export default function ProductCard({name,imageUrl,price}) {
+export default function ProductCard({ name, imageUrl, price, types, size }) {
+    const sizeName = ['тонкое', 'традиционное'];
+
     const [count, setCount] = useState(0);
+    const [weightP, setWeightP] = useState(0);
+    const [sizeP, setSizeP] = useState(0);
 
     const hundler = () => {
         setCount((prev) => prev + 1);
@@ -16,13 +20,18 @@ export default function ProductCard({name,imageUrl,price}) {
             <p className="nameP">{name}</p>
             <div className="presc">
                 <ul className="weight">
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {types.map((item, index) => (
+                        <li key={index} onClick={() => setWeightP(index)} className={weightP === index ? 'active' : ''}>
+                            {sizeName[item]}
+                        </li>
+                    ))}
                 </ul>
                 <ul className="size">
-                    <li className="active">20 см.</li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {size.map((item, index) => (
+                        <li key={index} onClick={() => setSizeP(index)} className={sizeP === index ? 'active' : ''}>
+                            {item} см
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div className={cn('price')}>

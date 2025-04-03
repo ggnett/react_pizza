@@ -37,9 +37,10 @@
         border-radius: 10px;
         font-size: 14px;
         font-weight: bold;
-        ul {
+        .size {
             display: flex;
             gap: 5px;
+            justify-content: center;
 
             li {
                 width: 33%;
@@ -47,15 +48,22 @@
                 padding: 10px 15px;
                 line-height: 1;
                 border-radius: 5px;
+                text-align: center;
             }
         }
 
         .weight {
             margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
 
             li {
-                width: 132px;
+                width: 100%;
                 text-align: center;
+                list-style-type: none;
+                padding: 10px 15px;
+                line-height: 1;
+                border-radius: 5px;
             }
         }
     }

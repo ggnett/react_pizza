@@ -2,10 +2,16 @@ import React from 'react';
 import './NavBar.scss';
 import cn from 'classnames';
 
+const list = ['популярности', 'цене', 'алфавиту'];
+
 export default function NavBar() {
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
     const [ind, setInd] = React.useState(0);
+
+    const [visible, setVisible] = React.useState(false);
+
+    const [namePopup, setNamePopup] = React.useState(0);
 
     const catHundler = (x) => {
         setInd(x);
@@ -30,15 +36,26 @@ export default function NavBar() {
                         />
                     </svg>
                     <b>Сортировка по:</b>
-                    <span>популярности</span>
+                    <span onClick={() => setVisible((prev) => (prev ? false : true))}>{list[namePopup]}</span>
                 </div>
-                <div className="sort__popup">
-                    <ul>
-                        <li className="active">популярности</li>
-                        <li>цене</li>
-                        <li>алфавиту</li>
-                    </ul>
-                </div>
+                {visible && (
+                    <div className="sort__popup">
+                        <ul>
+                            {list.map((item, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => {
+                                        setNamePopup(index);
+                                        setVisible(!visible);
+                                    }}
+                                    className={namePopup === index ? 'active' : ''}
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
         </div>
     );
