@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Empty from '../../components/Empty/Empty';
+// import Empty from '../../components/Empty/Empty';
 import style from './Cart.module.scss';
 import CardForCart from '../../components/CardForCart/CardForCart';
 
