@@ -1,0 +1,41 @@
+.root {
+    position: relative;
+    width: 20%;
+    left: -220px;
+    min-width:200px;
+
+    @media (max-width: 600px) {
+        left:0;
+        margin:20px 0;
+    }
+
+    input {
+        padding: 10px 25px;
+        width: 100%;
+        opacity: 0.5;
+        box-sizing: border-box;
+    }
+}
+
+.search {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 3px;
+    top: 10px;
+    opacity: 0.5;
+}
+
+.cross {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 1px;
+    top: 7px;
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}

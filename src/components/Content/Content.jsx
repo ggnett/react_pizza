@@ -8,6 +8,7 @@ export default function Content() {
     const [isLoading, setisLoading] = React.useState(true);
 
     React.useEffect(() => {
+        setisLoading(true);
         fetch('https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items')
             .then((res) => res.json())
             .then((items) => {
