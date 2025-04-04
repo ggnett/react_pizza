@@ -14,7 +14,7 @@ export default function Header() {
                     </div>
                 </Link>
                 <div className="header__cart">
-                    <a href="/cart.html" className="button button--cart">
+                    <Link to="/cart" className="button button--cart">
                         <span>520 ₽</span>
                         <span className="button__delimiter"></span>
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ export default function Header() {
                             />
                         </svg>
                         <span>3</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
