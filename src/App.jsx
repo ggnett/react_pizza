@@ -1,14 +1,17 @@
 import './normalize.scss';
+import { Routes, Route } from 'react-router';
 import Header from './components/Header/Header';
-import NavBar from './components/NavBar/NavBar';
-import Content from './components/Content/Content';
+import Main from './pages/Main/Main';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     return (
         <div className="wrapper">
             <Header />
-            <NavBar />
-            <Content />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </div>
     );
 }
