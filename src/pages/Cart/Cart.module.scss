@@ -3,23 +3,74 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     padding-top: 50px;
-    padding-bottom: 100px;
-    p {
+}
+
+.name {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
         font-size: 32px;
-        font-weight: bold;
+        font-weight: 700;
+
+        img {
+            margin-right: 17px;
+            width: 29px;
+            height: 29px;
+        }
     }
 
-    .presc {
-        font-size: 18px;
-        font-weight: 400;
-        color: #777777;
+    p {
+        font-size: 16px;
+        color: #b6b6b6;
+
+        img {
+            margin-right: 7px;
+        }
     }
 
-    img {
-        margin-top: 50px;
+    .clear {
+        cursor: pointer;
+        transition: all linear 0.3s;
+
+        &:hover {
+            color: darken($color: #000000, $amount: 40%);
+            text-shadow: 2px 2px 20px orangered;
+        }
+
+        &:active {
+            text-shadow: 1px 1px 10px black;
+        }
     }
+}
+
+.all {
+    margin-top: 40px;
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        font-size: 22px;
+
+        span {
+            color: orangered;
+            font-weight: bold;
+        }
+    }
+}
+
+.buttons {
+    margin-top: 40px;
+    margin-bottom: 131px;
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
 
     .back {
         text-decoration: none;
@@ -32,11 +83,40 @@
         justify-content: center;
         align-items: center;
         font-size: 16px;
-        font-weight: 700;
-        margin-top: 40px;
+        transition: all linear 0.3s;
 
         &:hover {
             background-color: lighten($color: #000000, $amount: 30%);
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        &:active {
+            transform: translateY(5px);
+            box-shadow: 0px 0px 0px 0px black;
+        }
+    }
+
+    .pay {
+        text-decoration: none;
+        background-color: orangered;
+        color: white;
+        width: 210px;
+        height: 46px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        transition: all linear 0.3s;
+
+        &:hover {
+            background-color: darken($color: orangered, $amount: 5%);
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        &:active {
+            transform: translateY(5px);
+            box-shadow: 0px 0px 0px 0px black;
         }
     }
 }

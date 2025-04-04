@@ -14,13 +14,16 @@ export default function Content() {
                 setList(items);
                 setisLoading(false);
             });
+        window.scrollTo(0, 0);
     }, []);
 
     return (
         <div className="content">
             <p className="title">Все пиццы</p>
             <div className="cardPlace">
-                {isLoading ? [...new Array(8)].map((_,index) => <Skeleton key={index} />) : list.map((item, index) => <ProductCard key={index} {...item} />)}
+                {isLoading
+                    ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+                    : list.map((item, index) => <ProductCard key={index} {...item} />)}
             </div>
         </div>
     );

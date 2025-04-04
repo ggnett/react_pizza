@@ -12,6 +12,10 @@ $duration: 0.15s;
     padding: 40px;
     margin-bottom: 10px;
 
+    @media (max-width: 400px) {
+        padding: 20px;
+    }
+
     .container {
         display: flex;
         align-items: center;
@@ -53,7 +57,7 @@ $duration: 0.15s;
     transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
     border: 1px solid transparent;
     text-decoration: none;
-    // @include noselect();
+    transition: all linear 0.5s;
     span {
         color: #fff;
     }
@@ -68,11 +72,13 @@ $duration: 0.15s;
 
     &:hover {
         background-color: darken($orange, 8%);
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     }
 
     &:active {
         background-color: darken($orange, 12%);
-        transform: translateY(1px);
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px black;
     }
 
     &--circle {

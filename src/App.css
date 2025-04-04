@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+.wrapper {
+  width: calc(100vw - 100px);
+  height: 100%;
+  background-color: #fff;
+  margin: 50px auto;
+  border-radius: 10px;
+  max-width: 1400px;
+
+  @media (max-width: 400px) {
+      width: calc(100vw - 50px);
+  }
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

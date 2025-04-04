@@ -8,7 +8,7 @@
     // margin-right: 5px;
 
     img {
-        margin-left: 15px;
+        // margin-left: 15px;
     }
 
     .nameP {
@@ -93,13 +93,16 @@
         align-items: center;
         gap: 5px;
         border: 2px solid orangered;
+        transition: all linear 0.5s;
 
         &:hover {
             background-color: orangered;
             color: white;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
         }
         &:active {
-            box-shadow: 1px 1px 1px 1px black;
+            box-shadow: 0px 0px 0px 0px black;
+            transform: translateY(5px);
         }
     }
 
