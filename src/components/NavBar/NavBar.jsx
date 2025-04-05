@@ -1,11 +1,17 @@
 import React from 'react';
 import './NavBar.scss';
 import cn from 'classnames';
+import { searchContext } from '../../App';
 
 const list = ['популярности', 'цене', 'алфавиту'];
+const listMok = ['rating', 'price', 'title'];
+
+let sortName = '';
 
 export default function NavBar() {
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+
+    const { searchValue, setSearchValue } = React.useContext(searchContext);
 
     const [ind, setInd] = React.useState(0);
 
@@ -21,7 +27,16 @@ export default function NavBar() {
         <div className="navBar">
             <ul className="categories">
                 {categories.map((item, index) => (
-                    <li key={item} onClick={() => catHundler(index)} className={cn(ind === index ? 'active' : '')}>
+                    <li
+                        key={index}
+                        onClick={() => {
+                            catHundler(index);
+                            setSearchValue(`&sortBy=${listMok[index]}`);
+                            index === 0 ? (sortName = '') : (sortName = `&category=${index}`);
+                            setSearchValue((prev) => prev + sortName);
+                        }}
+                        className={cn(ind === index ? 'active' : '')}
+                    >
                         {item}
                     </li>
                 ))}
@@ -47,6 +62,7 @@ export default function NavBar() {
                                     onClick={() => {
                                         setNamePopup(index);
                                         setVisible(!visible);
+                                        setSearchValue(`&sortBy=${listMok[index]}&${sortName}`);
                                     }}
                                     className={namePopup === index ? 'active' : ''}
                                 >
