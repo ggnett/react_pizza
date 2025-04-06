@@ -2,11 +2,11 @@
     position: relative;
     width: 20%;
     left: -220px;
-    min-width:200px;
+    min-width: 200px;
 
     @media (max-width: 600px) {
-        left:0;
-        margin:20px 0;
+        left: 0;
+        margin: 20px 0;
     }
 
     input {
@@ -33,9 +33,15 @@
     right: 1px;
     top: 7px;
     opacity: 0.5;
+    transition: all linear 0.3s;
 
     &:hover {
         opacity: 1;
         cursor: pointer;
+    }
+
+    &:active {
+        transform: rotate(360deg);
+        scale: 0;
     }
 }

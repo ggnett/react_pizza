@@ -1,12 +1,14 @@
 import React from 'react';
 
 import style from './Search.module.scss';
-import { searchContext } from '../../App';
+import { useDispatch } from 'react-redux';
+import { filterUpd } from '../../redux/slices/searchSlice';
 
 export default function Search() {
-    const [inpValue, setInpValue] = React.useState('');
 
-    const { setSearch } = React.useContext(searchContext);
+    const dispatch = useDispatch();
+
+    const [inpValue, setInpValue] = React.useState('');
 
     return (
         <div className={style.root}>
@@ -15,7 +17,7 @@ export default function Search() {
                 value={inpValue}
                 onChange={(i) => {
                     setInpValue(i.target.value);
-                    setSearch(`&title=${inpValue}`);
+                    dispatch(filterUpd(`&title=${inpValue}`))
                 }}
                 type="text"
                 placeholder="Поиск..."
@@ -23,7 +25,7 @@ export default function Search() {
             <img
                 onClick={() => {
                     setInpValue('');
-                    setSearch('');
+                    dispatch(filterUpd(''))
                 }}
                 className={style.cross}
                 src="./img/cross.svg"

@@ -2,27 +2,25 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Skeleton from '../Skeleton/Skeleton';
 import './Content.scss';
-import { searchContext } from '../../App';
+import {useSelector} from 'react-redux'
 
 export default function Content() {
     const [list, setList] = React.useState([]);
     const [isLoading, setisLoading] = React.useState(true);
-
-    const { searchValue, search } = React.useContext(searchContext);
-
     const [pagin, setPagin] = React.useState(0);
 
+    const search = useSelector(state => state.search)
 
     React.useEffect(() => {
         setisLoading(true);
-        fetch(`https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items?${searchValue + search}&p=${pagin + 1}&l=8`)
+        fetch(`https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items?${search.sort+search.catSort+search.filter}&p=${pagin + 1}&l=8`)
             .then((res) => res.json())
             .then((items) => {
                 Array.isArray(items) ? setList(items) : setList([]);
                 setisLoading(false);
             });
         window.scrollTo(0, 0);
-    }, [searchValue, search, pagin]);
+    }, [search, pagin]);
 
     function pagArrow1() {
         pagin > 0 ? setPagin((prev) => prev - 1) : setPagin(0);
@@ -46,7 +44,7 @@ export default function Content() {
                 <ul className={'pagination'}>
                     <li onClick={pagArrow1}>{'<'}</li>
                     {[...new Array(2)].map((_, index) => (
-                        <li className={index === pagin ? 'pag-active' : ''} onClick={() => setPagin(index)}>
+                        <li key={index} className={index === pagin ? 'pag-active' : ''} onClick={() => setPagin(index)}>
                             {index + 1}
                         </li>
                     ))}

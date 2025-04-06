@@ -1,7 +1,9 @@
 import React from 'react';
 import './NavBar.scss';
 import cn from 'classnames';
-import { searchContext } from '../../App';
+
+import { useDispatch } from 'react-redux';
+import { sortUpd, cartSortUpd } from '../../redux/slices/searchSlice';
 
 const list = ['популярности', 'цене', 'алфавиту'];
 const listMok = ['rating', 'price', 'title'];
@@ -9,9 +11,9 @@ const listMok = ['rating', 'price', 'title'];
 let sortName = '';
 
 export default function NavBar() {
-    const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+    const dispatch = useDispatch();
 
-    const { setSearchValue } = React.useContext(searchContext);
+    const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
     const [ind, setInd] = React.useState(0);
 
@@ -31,9 +33,8 @@ export default function NavBar() {
                         key={index}
                         onClick={() => {
                             catHundler(index);
-                            setSearchValue(`&sortBy=${listMok[index]}`);
                             index === 0 ? (sortName = '') : (sortName = `&category=${index}`);
-                            setSearchValue((prev) => prev + sortName);
+                            dispatch(cartSortUpd(sortName));
                         }}
                         className={cn(ind === index ? 'active' : '')}
                     >
@@ -62,7 +63,7 @@ export default function NavBar() {
                                     onClick={() => {
                                         setNamePopup(index);
                                         setVisible(!visible);
-                                        setSearchValue(`&sortBy=${listMok[index]}&${sortName}`);
+                                        dispatch(sortUpd(`&sortBy=${listMok[index]}`));
                                     }}
                                     className={namePopup === index ? 'active' : ''}
                                 >
