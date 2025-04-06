@@ -4,6 +4,7 @@ const initialState = {
     sort: '&sortBy=rating',
     catSort: '',
     filter: '',
+    pagInd:0,
 };
 
 export const searchSlice = createSlice({
@@ -19,9 +20,12 @@ export const searchSlice = createSlice({
         filterUpd:(state, action) => {
             state.filter = action.payload;
         },
+        pagIndUpd:(state, action) => {
+            state.pagInd = action.payload;
+        },
     },
 });
 
-export const { sortUpd, cartSortUpd,filterUpd } = searchSlice.actions;
+export const { sortUpd, cartSortUpd,filterUpd,pagIndUpd } = searchSlice.actions;
 
 export default searchSlice.reducer;

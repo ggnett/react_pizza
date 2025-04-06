@@ -3,7 +3,7 @@ import './NavBar.scss';
 import cn from 'classnames';
 
 import { useDispatch } from 'react-redux';
-import { sortUpd, cartSortUpd } from '../../redux/slices/searchSlice';
+import { sortUpd, cartSortUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 const list = ['популярности', 'цене', 'алфавиту'];
 const listMok = ['rating', 'price', 'title'];
@@ -21,10 +21,6 @@ export default function NavBar() {
 
     const [namePopup, setNamePopup] = React.useState(0);
 
-    const catHundler = (x) => {
-        setInd(x);
-    };
-
     return (
         <div className="navBar">
             <ul className="categories">
@@ -32,9 +28,10 @@ export default function NavBar() {
                     <li
                         key={index}
                         onClick={() => {
-                            catHundler(index);
+                            setInd(index);
                             index === 0 ? (sortName = '') : (sortName = `&category=${index}`);
                             dispatch(cartSortUpd(sortName));
+                            dispatch(pagIndUpd(0));
                         }}
                         className={cn(ind === index ? 'active' : '')}
                     >

@@ -28,10 +28,6 @@ export default function Search() {
                 value={inpValue}
                 onChange={(i) => {
                     setInpValue(i.target.value);
-                    // debounce(() => {
-                    //     dispatch(filterUpd(`&title=${i.target.value}`));
-                    //     console.log('event');
-                    // }, 200);
                     filUpd(i.target.value);
                 }}
                 type="text"
