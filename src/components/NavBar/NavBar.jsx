@@ -11,7 +11,7 @@ let sortName = '';
 export default function NavBar() {
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-    const { searchValue, setSearchValue } = React.useContext(searchContext);
+    const { setSearchValue } = React.useContext(searchContext);
 
     const [ind, setInd] = React.useState(0);
 

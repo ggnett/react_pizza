@@ -6,7 +6,7 @@ import { searchContext } from '../../App';
 export default function Search() {
     const [inpValue, setInpValue] = React.useState('');
 
-    const { search, setSearch} = React.useContext(searchContext);
+    const { setSearch } = React.useContext(searchContext);
 
     return (
         <div className={style.root}>
@@ -15,7 +15,7 @@ export default function Search() {
                 value={inpValue}
                 onChange={(i) => {
                     setInpValue(i.target.value);
-                    setSearch(`&title=${inpValue}`)
+                    setSearch(`&title=${inpValue}`);
                 }}
                 type="text"
                 placeholder="Поиск..."

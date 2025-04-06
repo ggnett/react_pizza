@@ -4,7 +4,7 @@
 }
 
 .cardPlace {
-        width: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     // gap:20px;
@@ -16,5 +16,44 @@
     margin-bottom: 30px;
     font-size: 32px;
     font-weight: 700;
-    padding-left:30px;
+    padding-left: 30px;
+}
+
+.pagination {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    justify-content: center;
+
+    li {
+        width: 25px;
+        height: 25px;
+        border: 2px solid orangered;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all linear 0.5s;
+        color:orangered;
+
+        &:hover {
+            box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        &:active {
+            transform: translateY(5px);
+            box-shadow: 0px 0px 0px 0px black;
+        }
+    }
+
+    .pag-active {
+        background-color: orangered;
+        color:white;
+    }
 }
