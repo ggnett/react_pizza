@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { filterUpd } from '../../redux/slices/searchSlice';
 
 export default function Search() {
-
     const dispatch = useDispatch();
 
     const [inpValue, setInpValue] = React.useState('');
@@ -17,7 +16,7 @@ export default function Search() {
                 value={inpValue}
                 onChange={(i) => {
                     setInpValue(i.target.value);
-                    dispatch(filterUpd(`&title=${inpValue}`))
+                    dispatch(filterUpd(`&title=${i.target.value}`));
                 }}
                 type="text"
                 placeholder="Поиск..."
@@ -25,7 +24,7 @@ export default function Search() {
             <img
                 onClick={() => {
                     setInpValue('');
-                    dispatch(filterUpd(''))
+                    dispatch(filterUpd(''));
                 }}
                 className={style.cross}
                 src="./img/cross.svg"
