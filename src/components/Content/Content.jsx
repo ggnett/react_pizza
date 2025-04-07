@@ -40,13 +40,11 @@ export default function Content() {
     React.useEffect(() => {
         if (window.location.search !== '') {
             const params = qs.parse(String(window.location.search).substring(1));
-            console.log(params);
             dispatch(sortUpd(`&sortBy=${params.sortBy}`));
             dispatch(cartSortUpd(`&category=${params.category}`));
             dispatch(filterUpd(`${params.title}`));
             dispatch(pagIndUpd(Number(params.p) - 1));
-            secondRef.current = true;
-            console.log('tyt');
+            secondRef.current = false;
 
             //!!!!!!!!!!!!!!!!!!! 2 zaprosa na 2m rendere
         }
@@ -74,6 +72,7 @@ export default function Content() {
                 });
         }
         window.scrollTo(0, 0);
+        secondRef.current = true;
     }, [search]);
 
     return (
