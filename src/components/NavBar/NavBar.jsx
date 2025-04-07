@@ -2,7 +2,7 @@ import React from 'react';
 import './NavBar.scss';
 import cn from 'classnames';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sortUpd, cartSortUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 const list = ['популярности', 'цене', 'алфавиту'];
@@ -12,10 +12,9 @@ let sortName = '';
 
 export default function NavBar() {
     const dispatch = useDispatch();
+    const catSort = useSelector((state) => state.search.catSort);
 
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-
-    const [ind, setInd] = React.useState(0);
 
     const [visible, setVisible] = React.useState(false);
 
@@ -28,12 +27,11 @@ export default function NavBar() {
                     <li
                         key={index}
                         onClick={() => {
-                            setInd(index);
                             index === 0 ? (sortName = '') : (sortName = `&category=${index}`);
                             dispatch(cartSortUpd(sortName));
                             dispatch(pagIndUpd(0));
                         }}
-                        className={cn(ind === index ? 'active' : '')}
+                        className={cn(Number(catSort.substring(10)) === index ? 'active' : '')}
                     >
                         {item}
                     </li>
