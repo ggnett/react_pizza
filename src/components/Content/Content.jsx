@@ -7,7 +7,7 @@ import axios from 'axios';
 import Pagination from '../Pagination/Pagination';
 import qs from 'qs';
 import { useNavigate } from 'react-router';
-import { sortUpd, cartSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
+import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 export default function Content() {
     const [list, setList] = React.useState([]);
@@ -17,17 +17,18 @@ export default function Content() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const sort = search.sort;
-    const categ = search.catSort;
-
+    // ne vstavliaem v stroku pro 1st rendere
     const firstRend = React.useRef(false);
+
+    // ubiraem zadvoeiniy render izza updeita steita
     const secondRef = React.useRef(true);
 
+    //sozdanie i prokidivanie v stroku url
     React.useEffect(() => {
         if (firstRend.current === true) {
             const qString = qs.stringify({
-                sortBy: sort.substring(8),
-                category: categ.substring(10),
+                sortBy: search.sort.substring(8),
+                category: search.catSort.substring(10),
                 title: search.filter,
                 p: search.pagInd + 1,
                 l: 8,
@@ -35,19 +36,19 @@ export default function Content() {
             navigate(`?${qString}`);
         }
         firstRend.current = true;
-    }, [search, search.filter, categ, sort, navigate, search.pagInd]);
+    }, [search, search.filter, navigate, search.pagInd]);
 
+    // obnovlenie steita iz stroki url
     React.useEffect(() => {
         if (window.location.search !== '') {
             const params = qs.parse(String(window.location.search).substring(1));
             dispatch(sortUpd(`&sortBy=${params.sortBy}`));
-            dispatch(cartSortUpd(`&category=${params.category}`));
+            dispatch(catSortUpd(`&category=${params.category}`));
             dispatch(filterUpd(`${params.title}`));
             dispatch(pagIndUpd(Number(params.p) - 1));
             secondRef.current = false;
-
-            //!!!!!!!!!!!!!!!!!!! 2 zaprosa na 2m rendere
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useEffect(() => {

@@ -3,7 +3,7 @@ import './NavBar.scss';
 import cn from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { sortUpd, cartSortUpd, pagIndUpd } from '../../redux/slices/searchSlice';
+import { sortUpd, catSortUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 const list = ['популярности', 'цене', 'алфавиту'];
 const listMok = ['rating', 'price', 'title'];
@@ -28,7 +28,7 @@ export default function NavBar() {
                         key={index}
                         onClick={() => {
                             index === 0 ? (sortName = '') : (sortName = `&category=${index}`);
-                            dispatch(cartSortUpd(sortName));
+                            dispatch(catSortUpd(sortName));
                             dispatch(pagIndUpd(0));
                         }}
                         className={cn(Number(catSort.substring(10)) === index ? 'active' : '')}

@@ -1,12 +1,13 @@
 import React from 'react';
 
 import style from './Search.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterUpd } from '../../redux/slices/searchSlice';
 import debounce from 'lodash.debounce';
 
 export default function Search() {
     const dispatch = useDispatch();
+    const val = useSelector((state) => state.search.filter);
 
     const [inpValue, setInpValue] = React.useState('');
 
@@ -19,6 +20,10 @@ export default function Search() {
         }, 1000),
         []
     );
+
+    React.useEffect(() => {
+        setInpValue(val.substring(7));
+    }, [val]);
 
     return (
         <div className={style.root}>
@@ -35,7 +40,6 @@ export default function Search() {
             />
             <img
                 onClick={() => {
-                    setInpValue('');
                     dispatch(filterUpd(''));
                     inputRef.current.focus();
                 }}
