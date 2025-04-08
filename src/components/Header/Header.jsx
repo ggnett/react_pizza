@@ -2,12 +2,25 @@ import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router';
 import Search from '../Search/Search';
+import { useDispatch } from 'react-redux';
+import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 export default function Header() {
+    const dispatch = useDispatch();
     return (
         <div className="header">
             <div className="container">
-                <Link onClick={() => window.scrollTo(0, 0)} to="/" className="header__logo">
+                <Link
+                    onClick={() => {
+                        window.scrollTo(0, 0);
+                        dispatch(sortUpd('&sortBy=rating'));
+                        dispatch(catSortUpd(''));
+                        dispatch(filterUpd(''));
+                        dispatch(pagIndUpd(0));
+                    }}
+                    to="/"
+                    className="header__logo"
+                >
                     <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
                     <div>
                         <h1>React Pizza</h1>

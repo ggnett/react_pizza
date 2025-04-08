@@ -20,6 +20,19 @@ export default function NavBar() {
 
     const [namePopup, setNamePopup] = React.useState(0);
 
+    const sortRef = React.useRef();
+
+    React.useEffect(() => {
+        const popupVisibleHundler = (event) => {
+            if (!event.composedPath().includes(sortRef.current)) {
+                setVisible(false);
+            }
+        };
+
+        document.body.addEventListener('click', popupVisibleHundler);
+        return () => document.body.removeEventListener('click', popupVisibleHundler);
+    }, []);
+
     return (
         <div className="navBar">
             <ul className="categories">
@@ -38,7 +51,7 @@ export default function NavBar() {
                 ))}
             </ul>
 
-            <div className="sort">
+            <div className="sort" ref={sortRef}>
                 <div className="sort__label">
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
