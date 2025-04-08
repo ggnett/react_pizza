@@ -71,6 +71,8 @@
         transition: all linear 0.5s;
 
         &:hover {
+            color: darken(orangered, 2%);
+            border-color: darken(orangered, 2%);
             box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
         }
 

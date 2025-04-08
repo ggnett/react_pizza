@@ -2,8 +2,12 @@ import React from 'react';
 import './ProductCard.scss';
 import { useState } from 'react';
 import cn from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTotalCost, addItemToCart } from '../../redux/slices/cartSlice';
 
-export default function ProductCard({ title, imageUrl, price, types, sizes }) {
+export default function ProductCard({ id, title, imageUrl, price, types, sizes }) {
+    const dispatch = useDispatch();
+    const itemms = useSelector((state) => state.cart.items);
     const sizeName = ['тонкое', 'традиционное'];
 
     const [count, setCount] = useState(0);
@@ -11,7 +15,14 @@ export default function ProductCard({ title, imageUrl, price, types, sizes }) {
     const [sizeP, setSizeP] = useState(0);
 
     const hundler = () => {
+        const weight = sizeName[weightP];
+        const size = sizes[sizeP];
         setCount((prev) => prev + 1);
+        // dopilit' poisk po  masivu na vernoe
+        const test = Boolean(itemms.find((item) => item.id === id && item.size === size && item.weight === weight));
+        console.log(test);
+        dispatch(addItemToCart({ id, title, imageUrl, price, weight, size }));
+        dispatch(addTotalCost(price));
     };
 
     return (

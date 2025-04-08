@@ -2,11 +2,13 @@ import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router';
 import Search from '../Search/Search';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 
 export default function Header() {
     const dispatch = useDispatch();
+    const { totalCost, totalCount } = useSelector((state) => state.cart);
+
     return (
         <div className="header">
             <div className="container">
@@ -30,7 +32,7 @@ export default function Header() {
                 <Search />
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
-                        <span>520 ₽</span>
+                        <span>{totalCost} ₽</span>
                         <span className="button__delimiter"></span>
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -55,7 +57,7 @@ export default function Header() {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        <span>3</span>
+                        <span>{totalCount}</span>
                     </Link>
                 </div>
             </div>
