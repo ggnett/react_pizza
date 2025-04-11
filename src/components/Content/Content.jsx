@@ -8,12 +8,13 @@ import Pagination from '../Pagination/Pagination';
 import qs from 'qs';
 import { useNavigate } from 'react-router';
 import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
+import { addItems, fetchPizzaByUrl } from '../../redux/slices/pizzaSlice';
 
 export default function Content() {
-    const [list, setList] = React.useState([]);
     const [isLoading, setisLoading] = React.useState(true);
 
     const search = useSelector((state) => state.search);
+    const items = useSelector((state) => state.pizza.items);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -52,25 +53,22 @@ export default function Content() {
     }, []);
 
     React.useEffect(() => {
+        setisLoading(true);
+        const fetchPizza = async () => {
+            try {
+                const tt = await dispatch(fetchPizzaByUrl(search));
+                console.log(tt.payload);
+                dispatch(addItems(tt.payload));
+            } catch (e) {
+                console.log(e);
+                dispatch(addItems([]));
+            } finally {
+                setisLoading(false);
+            }
+        };
         if (secondRef.current === true) {
             setisLoading(true);
-            // fetch(`https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items?${search.sort + search.catSort + search.filter}&p=${pagin + 1}&l=8`)
-            //     .then((res) => res.json())
-            //     .then((items) => {
-            //         Array.isArray(items) ? setList(items) : setList([]);
-            //         setisLoading(false);
-            //     });
-
-            axios
-                .get(`https://67eeff3fc11d5ff4bf7b8251.mockapi.io/items?${search.sort + search.catSort + search.filter}&p=${search.pagInd + 1}&l=8`)
-                .then((res) => {
-                    setList(res.data);
-                    setisLoading(false);
-                })
-                .catch((e) => {
-                    setList([]);
-                    setisLoading(false);
-                });
+            fetchPizza();
         }
         window.scrollTo(0, 0);
         secondRef.current = true;
@@ -83,7 +81,7 @@ export default function Content() {
                 <div className="cardPlace">
                     {isLoading
                         ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                        : list.map((item, index) => <ProductCard key={index} {...item} />)}
+                        : items.map((item, index) => <ProductCard key={index} {...item} />)}
                 </div>
             </div>
             <Pagination />
