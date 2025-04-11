@@ -3,7 +3,6 @@ import ProductCard from '../ProductCard/ProductCard';
 import Skeleton from '../Skeleton/Skeleton';
 import './Content.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import Pagination from '../Pagination/Pagination';
 import qs from 'qs';
 import { useNavigate } from 'react-router';
@@ -72,6 +71,7 @@ export default function Content() {
         }
         window.scrollTo(0, 0);
         secondRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     return (
