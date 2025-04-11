@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Skeleton from '../Skeleton/Skeleton';
+import FetchError from '../FetchError/FetchError'
+
 import './Content.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import Pagination from '../Pagination/Pagination';
@@ -10,10 +12,10 @@ import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/se
 import { addItems, fetchPizzaByUrl } from '../../redux/slices/pizzaSlice';
 
 export default function Content() {
-    const [isLoading, setisLoading] = React.useState(true);
-
     const search = useSelector((state) => state.search);
     const items = useSelector((state) => state.pizza.items);
+    const isLoading = useSelector((state) => state.pizza.isLoading);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ export default function Content() {
             navigate(`?${qString}`);
         }
         firstRend.current = true;
-    }, [search, search.filter, navigate, search.pagInd]);
+    }, [search, navigate]);
 
     // obnovlenie steita iz stroki url
     React.useEffect(() => {
@@ -52,26 +54,21 @@ export default function Content() {
     }, []);
 
     React.useEffect(() => {
-        setisLoading(true);
         const fetchPizza = async () => {
             try {
-                const tt = await dispatch(fetchPizzaByUrl(search));
-                console.log(tt.payload);
-                dispatch(addItems(tt.payload));
+                const data = await dispatch(fetchPizzaByUrl(search));
+                dispatch(addItems(data.payload));
             } catch (e) {
                 console.log(e);
                 dispatch(addItems([]));
-            } finally {
-                setisLoading(false);
             }
         };
         if (secondRef.current === true) {
-            setisLoading(true);
             fetchPizza();
         }
         window.scrollTo(0, 0);
         secondRef.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     return (
@@ -79,9 +76,13 @@ export default function Content() {
             <div className="content">
                 <p className="title">Все пиццы</p>
                 <div className="cardPlace">
-                    {isLoading
-                        ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                        : items.map((item, index) => <ProductCard key={index} {...item} />)}
+                    {isLoading === 'pending' ? (
+                        [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+                    ) : isLoading === 'resolve' ? (
+                        items.map((item, index) => <ProductCard key={index} {...item} />)
+                    ) : (
+                        <FetchError />
+                    )}
                 </div>
             </div>
             <Pagination />

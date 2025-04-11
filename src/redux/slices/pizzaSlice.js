@@ -11,6 +11,7 @@ export const fetchPizzaByUrl = createAsyncThunk('pizza/fetchPizzaByUrl', async (
 
 const initialState = {
     items: [],
+    isLoading: 'pending'
 };
 
 export const pizzaSlice = createSlice({
@@ -20,9 +21,24 @@ export const pizzaSlice = createSlice({
         addItems: (state, action) => {
             state.items = [...action.payload];
         },
+        isLoadingHundler: (state, action) => {
+            state.isLoading = action.payload;
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchPizzaByUrl.pending, (state) => {
+                state.isLoading = 'pending';
+            })
+            .addCase(fetchPizzaByUrl.fulfilled, (state, action) => {
+                state.isLoading = 'resolve';
+            })
+            .addCase(fetchPizzaByUrl.rejected, (state) => {
+                state.isLoading = 'reject';
+            });
     },
 });
 
-export const { addItems } = pizzaSlice.actions;
+export const { addItems, isLoadingHundler } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
