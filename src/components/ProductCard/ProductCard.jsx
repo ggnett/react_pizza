@@ -3,12 +3,12 @@ import './ProductCard.scss';
 import { useState } from 'react';
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTotalCost, addItemToCart, addCountOfPizza, addTotalCount, plusIdVnut } from '../../redux/slices/cartSlice';
+import { addTotalCost, addItemToCart, addCountOfPizza, addTotalCount, plusIdVnut, selectCart } from '../../redux/slices/cartSlice';
 
 export default function ProductCard({ id, title, imageUrl, price, types, sizes }) {
     const dispatch = useDispatch();
-    const itemms = useSelector((state) => state.cart.items);
-    const idVnut = useSelector((state) => state.cart.idVnut);
+    const {items} = useSelector(selectCart);
+    const {idVnut} = useSelector(selectCart);
     const sizeName = ['тонкое', 'традиционное'];
 
     const [count, setCount] = useState(0);
@@ -27,9 +27,9 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
             idVnut,
         };
         setCount((prev) => prev + 1);
-        const objSearch = itemms.find((item, index) => item.id === id && item.size === obj.size && item.weight === obj.weight);
+        const objSearch = items.find((item, index) => item.id === id && item.size === obj.size && item.weight === obj.weight);
         if (objSearch) {
-            const i = itemms.indexOf(objSearch);
+            const i = items.indexOf(objSearch);
             dispatch(addCountOfPizza(i));
             dispatch(addTotalCount());
         } else {
@@ -41,7 +41,7 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
     };
 
     React.useEffect(() => {
-        itemms.forEach((item, index) => {
+        items.forEach((item, index) => {
             if (item.id === id) setCount((prev) => prev + item.count);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps

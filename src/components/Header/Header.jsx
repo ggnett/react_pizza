@@ -4,10 +4,11 @@ import { Link } from 'react-router';
 import Search from '../Search/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
+import { selectCart } from '../../redux/slices/cartSlice';
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { totalCost, totalCount } = useSelector((state) => state.cart);
+    const { totalCost, totalCount } = useSelector(selectCart);
 
     return (
         <div className="header">

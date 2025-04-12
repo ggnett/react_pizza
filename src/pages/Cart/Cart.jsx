@@ -7,10 +7,10 @@ import CardForCart from '../../components/CardForCart/CardForCart';
 
 import { useSelector, useDispatch } from 'react-redux';
 import Empty from '../../components/Empty/Empty';
-import { clearCart } from '../../redux/slices/cartSlice';
+import { clearCart, selectCart } from '../../redux/slices/cartSlice';
 
 export default function Cart() {
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
     if (cart.items.length === 0) return <Empty />;
