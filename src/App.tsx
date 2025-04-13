@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Main from './pages/Main/Main';
 import NotFound from './pages/NotFound/NotFound';
 import Cart from './pages/Cart/Cart';
-import React from 'react';
+import * as React from 'react';
 import PizzaDesc from './pages/PizzaDesc/PizzaDesc';
 
 function App() {
