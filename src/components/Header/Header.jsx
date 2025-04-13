@@ -5,10 +5,12 @@ import Search from '../Search/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 import { selectCart } from '../../redux/slices/cartSlice';
+import { useLocation } from 'react-router';
 
 export default function Header() {
     const dispatch = useDispatch();
     const { totalCost, totalCount } = useSelector(selectCart);
+    const location = useLocation();
 
     return (
         <div className="header">
@@ -24,7 +26,7 @@ export default function Header() {
                     to="/"
                     className="header__logo"
                 >
-                    <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
+                    <img width="38" src={`${process.env.PUBLIC_URL}/img/pizza-logo.svg`} alt="Pizza logo" />
                     <div>
                         <h1>React Pizza</h1>
                         <p>самая вкусная пицца во вселенной</p>
@@ -32,6 +34,7 @@ export default function Header() {
                 </Link>
                 <Search />
                 <div className="header__cart">
+                    {location.pathname !== '/cart' &&
                     <Link to="/cart" className="button button--cart">
                         <span>{totalCost} ₽</span>
                         <span className="button__delimiter"></span>
@@ -59,7 +62,7 @@ export default function Header() {
                             />
                         </svg>
                         <span>{totalCount}</span>
-                    </Link>
+                    </Link>}
                 </div>
             </div>
         </div>

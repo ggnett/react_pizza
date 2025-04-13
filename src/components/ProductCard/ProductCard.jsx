@@ -4,11 +4,12 @@ import { useState } from 'react';
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTotalCost, addItemToCart, addCountOfPizza, addTotalCount, plusIdVnut, selectCart } from '../../redux/slices/cartSlice';
+import { Link } from 'react-router';
 
 export default function ProductCard({ id, title, imageUrl, price, types, sizes }) {
     const dispatch = useDispatch();
-    const {items} = useSelector(selectCart);
-    const {idVnut} = useSelector(selectCart);
+    const { items } = useSelector(selectCart);
+    const { idVnut } = useSelector(selectCart);
     const sizeName = ['тонкое', 'традиционное'];
 
     const [count, setCount] = useState(0);
@@ -49,8 +50,10 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
 
     return (
         <div className="card">
-            <img src={imageUrl} alt="gg" />
-            <p className="nameP">{title}</p>
+            <Link to={`/pizza/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <img src={imageUrl} alt="gg" />
+                <p className="nameP">{title}</p>
+            </Link>
             <div className="presc">
                 <ul className="weight">
                     {types.map((item, index) => (
