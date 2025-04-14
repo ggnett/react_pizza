@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface searchSliceInt {
     sort:string,
@@ -18,16 +18,16 @@ export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        sortUpd: (state, action) => {
+        sortUpd: (state, action: PayloadAction<string>) => {
             state.sort = action.payload;
         },
-        catSortUpd: (state, action) => {
+        catSortUpd: (state, action: PayloadAction<string>) => {
             state.catSort = action.payload;
         },
-        filterUpd: (state, action) => {
+        filterUpd: (state, action: PayloadAction<string>) => {
             state.filter = action.payload;
         },
-        pagIndUpd: (state, action) => {
+        pagIndUpd: (state, action: PayloadAction<number>) => {
             state.pagInd = action.payload;
         },
     },

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 export type itemsType = {
@@ -33,25 +33,25 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItemToCart: (state, action) => {
+        addItemToCart: (state, action: PayloadAction<itemsType>) => {
             state.items.push(action.payload);
             state.totalCount++;
         },
-        addTotalCost: (state, action) => {
+        addTotalCost: (state, action: PayloadAction<number>) => {
             state.totalCost += action.payload;
         },
-        minusTotalCost: (state, action) => {
+        minusTotalCost: (state, action: PayloadAction<number>) => {
             state.totalCost -= action.payload;
         },
-        addCountOfPizza: (state, action) => {
+        addCountOfPizza: (state, action: PayloadAction<number>) => {
             state.items[action.payload].count ? state.items[action.payload].count++ : console.log('nf')
         },
-        addCountOfPizzaCart: (state, action) => {
+        addCountOfPizzaCart: (state, action: PayloadAction<number>) => {
             let rez:any = state.items.find((item) => item.idVnut === action.payload);
             let rez2 = state.items.indexOf(rez);
             state.items[rez2].count ? state.items[rez2].count++ : console.log('nf')
         },
-        minusCountOfPizza: (state, action) => {
+        minusCountOfPizza: (state, action: PayloadAction<number>) => {
             let rez:any = state.items.find((item) => item.idVnut === action.payload);
             let rez2 = state.items.indexOf(rez);
             state.items[rez2].count--;
@@ -66,7 +66,7 @@ export const cartSlice = createSlice({
             state.totalCount = 0;
         },
         //udalenie
-        minusItem: (state, action) => {
+        minusItem: (state, action: PayloadAction<number>) => {
             let result = window.confirm('удалить позицию?');
             if (result) state.items = state.items.filter((item) => item.idVnut !== action.payload);
         },
@@ -74,7 +74,7 @@ export const cartSlice = createSlice({
         plusIdVnut: (state) => {
             state.idVnut++;
         },
-        minusTotalCount: (state, action) => {
+        minusTotalCount: (state, action: PayloadAction<number>) => {
             state.totalCount -= action.payload;
         },
     },
