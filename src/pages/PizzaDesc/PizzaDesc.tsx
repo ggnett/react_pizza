@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
@@ -8,7 +8,11 @@ export default function PizzaDesc() {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [pizza, setPizza] = React.useState();
+    const [pizza, setPizza] = React.useState<{
+        imageUrl: string;
+        title: string;
+        price: number;
+    }>();
 
     React.useEffect(() => {
         const fetchPizza = async () => {

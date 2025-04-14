@@ -1,9 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import './NavBar.scss';
 import cn from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { sortUpd, catSortUpd, pagIndUpd } from '../../redux/slices/searchSlice';
+import { RootState } from '../../redux/store';
 
 const list = ['популярности', 'цене', 'алфавиту'];
 const listMok = ['rating', 'price', 'title'];
@@ -12,7 +13,7 @@ let sortName = '';
 
 export default function NavBar() {
     const dispatch = useDispatch();
-    const catSort = useSelector((state) => state.search.catSort);
+    const catSort = useSelector((state:RootState) => state.search.catSort);
 
     const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
@@ -20,10 +21,10 @@ export default function NavBar() {
 
     const [namePopup, setNamePopup] = React.useState(0);
 
-    const sortRef = React.useRef();
+    const sortRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        const popupVisibleHundler = (event) => {
+        const popupVisibleHundler = (event:any) => {
             if (!event.composedPath().includes(sortRef.current)) {
                 setVisible(false);
             }

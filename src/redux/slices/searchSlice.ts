@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export interface searchSliceInt {
+    sort:string,
+    catSort: string,
+    filter:string,
+    pagInd:number
+}
+
+const initialState:searchSliceInt = {
     sort: '&sortBy=rating',
     catSort: '',
     filter: '',

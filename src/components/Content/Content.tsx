@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Skeleton from '../Skeleton/Skeleton';
 import FetchError from '../FetchError/FetchError'
@@ -6,18 +6,19 @@ import FetchError from '../FetchError/FetchError'
 import './Content.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import Pagination from '../Pagination/Pagination';
-import qs from 'qs';
+import * as qs from 'qs';
 import { useNavigate } from 'react-router';
 import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/searchSlice';
 import { addItems, fetchPizzaByUrl } from '../../redux/slices/pizzaSlice';
+import { AppDispatch, RootState } from '../../redux/store';
 
 export default function Content() {
-    const search = useSelector((state) => state.search);
-    const items = useSelector((state) => state.pizza.items);
-    const isLoading = useSelector((state) => state.pizza.isLoading);
+    const search = useSelector((state:RootState) => state.search);
+    const items = useSelector((state:RootState) => state.pizza.items);
+    const isLoading = useSelector((state:RootState) => state.pizza.isLoading);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     // ne vstavliaem v stroku pro 1st rendere
     const firstRend = React.useRef(false);
@@ -79,7 +80,7 @@ export default function Content() {
                     {isLoading === 'pending' ? (
                         [...new Array(8)].map((_, index) => <Skeleton key={index} />)
                     ) : isLoading === 'resolve' ? (
-                        items.map((item, index) => <ProductCard key={index} {...item} />)
+                        items.map((item:any, index:number) => <ProductCard key={index} {...item} />)
                     ) : (
                         <FetchError />
                     )}

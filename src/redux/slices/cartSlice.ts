@@ -1,6 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
-const initialState = {
+export type itemsType = {
+    id:string,
+    title: string,
+    imageUrl: string,
+    price: number,
+    types?:number[],
+    sizes?: number[],
+    size?:number,
+    weight?:string,
+    count:number
+    idVnut?:number
+}
+
+interface cartSliceInt {
+    items:itemsType[],
+    totalCost:number,
+    totalCount:number,
+    idVnut:number
+}
+
+
+const initialState:cartSliceInt = {
     items: [],
     totalCost: 0,
     totalCount: 0,
@@ -22,15 +44,15 @@ export const cartSlice = createSlice({
             state.totalCost -= action.payload;
         },
         addCountOfPizza: (state, action) => {
-            state.items[action.payload].count++;
+            state.items[action.payload].count ? state.items[action.payload].count++ : console.log('nf')
         },
         addCountOfPizzaCart: (state, action) => {
-            let rez = state.items.find((item) => item.idVnut === action.payload);
+            let rez:any = state.items.find((item) => item.idVnut === action.payload);
             let rez2 = state.items.indexOf(rez);
-            state.items[rez2].count++;
+            state.items[rez2].count ? state.items[rez2].count++ : console.log('nf')
         },
         minusCountOfPizza: (state, action) => {
-            let rez = state.items.find((item) => item.idVnut === action.payload);
+            let rez:any = state.items.find((item) => item.idVnut === action.payload);
             let rez2 = state.items.indexOf(rez);
             state.items[rez2].count--;
         },
@@ -58,7 +80,7 @@ export const cartSlice = createSlice({
     },
 });
 
-export const selectCart = (state) => state.cart;
+export const selectCart = (state:RootState) => state.cart;
 
 export const {
     addItemToCart,

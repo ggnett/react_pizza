@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import './ProductCard.scss';
 import { useState } from 'react';
 import cn from 'classnames';
@@ -6,7 +6,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTotalCost, addItemToCart, addCountOfPizza, addTotalCount, plusIdVnut, selectCart } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router';
 
-export default function ProductCard({ id, title, imageUrl, price, types, sizes }) {
+
+interface prop {
+    id:string,
+    title: string,
+    imageUrl: string,
+    price: number,
+    types?:number[],
+    sizes?: number[],
+    size?:number,
+    weight?:string,
+    idVnut?:number
+    count?:number
+}
+
+export default function ProductCard({ id, title, imageUrl, price, types, sizes }:prop) {
     const dispatch = useDispatch();
     const { items } = useSelector(selectCart);
     const { idVnut } = useSelector(selectCart);
@@ -17,18 +31,18 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
     const [sizeP, setSizeP] = useState(0);
 
     const hundler = () => {
-        const obj = {
+        const obj:prop = {
             id,
             title,
             imageUrl,
             price,
             weight: sizeName[weightP],
-            size: sizes[sizeP],
+            size: sizes?.[sizeP],
             count: 1,
             idVnut,
         };
         setCount((prev) => prev + 1);
-        const objSearch = items.find((item, index) => item.id === id && item.size === obj.size && item.weight === obj.weight);
+        const objSearch = items.find((item:prop, index:number) => item.id === id && item.size === obj.size && item.weight === obj.weight);
         if (objSearch) {
             const i = items.indexOf(objSearch);
             dispatch(addCountOfPizza(i));
@@ -42,7 +56,7 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
     };
 
     React.useEffect(() => {
-        items.forEach((item, index) => {
+        items.forEach((item:any, index:number) => {
             if (item.id === id) setCount((prev) => prev + item.count);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,14 +70,14 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
             </Link>
             <div className="presc">
                 <ul className="weight">
-                    {types.map((item, index) => (
+                    {types?.map((item, index) => (
                         <li key={index} onClick={() => setWeightP(index)} className={weightP === index ? 'active' : ''}>
                             {sizeName[item]}
                         </li>
                     ))}
                 </ul>
                 <ul className="size">
-                    {sizes.map((item, index) => (
+                    {sizes?.map((item, index) => (
                         <li key={index} onClick={() => setSizeP(index)} className={sizeP === index ? 'active' : ''}>
                             {item} см
                         </li>

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router';
 
 // import Empty from '../../components/Empty/Empty';
@@ -32,7 +32,7 @@ export default function Cart() {
                     Очистить корзину
                 </p>
             </div>
-            {cart.items.map((item, index) => (
+            {cart.items.map((item:any, index:number) => (
                 <CardForCart key={index} {...item} />
             ))}
             <div className={style.all}>

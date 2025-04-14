@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import style from './CardForCart.module.scss';
 import { useDispatch } from 'react-redux';
@@ -12,7 +12,18 @@ import {
     minusTotalCount,
 } from '../../redux/slices/cartSlice';
 
-export default function CardForCart({ id, imageUrl, title, weight, size, price, count, idVnut }) {
+interface prop {
+    imageUrl: string,
+    title: string,
+    weight:number[],
+    size: number[],
+    price: number,
+    count:number,
+    idVnut:number
+}
+
+
+export default function CardForCart({ imageUrl, title, weight, size, price, count, idVnut }:prop) {
     const dispatch = useDispatch();
 
     return (

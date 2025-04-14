@@ -1,11 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { pagIndUpd } from '../../redux/slices/searchSlice';
 
 import style from './Pagination.module.scss';
+import { RootState } from '../../redux/store';
 
 export default function Pagination() {
-    const pagin = useSelector((state) => state.search.pagInd);
+    const pagin = useSelector((state:RootState) => state.search.pagInd);
     const dispatch = useDispatch();
 
     function pagArrow1() {
