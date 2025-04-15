@@ -6,21 +6,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTotalCost, addItemToCart, addCountOfPizza, addTotalCount, plusIdVnut, selectCart } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router';
 
-
 interface prop {
-    id:string,
-    title: string,
-    imageUrl: string,
-    price: number,
-    types?:number[],
-    sizes?: number[],
-    size?:number,
-    weight?:string,
-    idVnut?:number
-    count?:number
+    id: string;
+    title: string;
+    imageUrl: string;
+    price: number;
+    types?: number[];
+    sizes?: number[];
+    size?: number;
+    weight?: string;
+    idVnut?: number;
+    count?: number;
 }
 
-export default function ProductCard({ id, title, imageUrl, price, types, sizes }:prop) {
+export default function ProductCard({ id, title, imageUrl, price, types, sizes }: prop) {
     const dispatch = useDispatch();
     const { items } = useSelector(selectCart);
     const { idVnut } = useSelector(selectCart);
@@ -31,7 +30,7 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
     const [sizeP, setSizeP] = useState(0);
 
     const hundler = () => {
-        const obj:prop = {
+        const obj: any = {
             id,
             title,
             imageUrl,
@@ -42,7 +41,7 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
             idVnut,
         };
         setCount((prev) => prev + 1);
-        const objSearch = items.find((item:prop, index:number) => item.id === id && item.size === obj.size && item.weight === obj.weight);
+        const objSearch = items.find((item: prop, index: number) => item.id === id && item.size === obj.size && item.weight === obj.weight);
         if (objSearch) {
             const i = items.indexOf(objSearch);
             dispatch(addCountOfPizza(i));
@@ -56,7 +55,7 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
     };
 
     React.useEffect(() => {
-        items.forEach((item:any, index:number) => {
+        items.forEach((item: any, index: number) => {
             if (item.id === id) setCount((prev) => prev + item.count);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps

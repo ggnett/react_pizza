@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Empty from '../../components/Empty/Empty';
 import { clearCart, selectCart } from '../../redux/slices/cartSlice';
 
-export default function Cart() {
+const Cart = React.memo(function Cart() {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export default function Cart() {
                     Очистить корзину
                 </p>
             </div>
-            {cart.items.map((item:any, index:number) => (
+            {cart.items.map((item: any, index: number) => (
                 <CardForCart key={index} {...item} />
             ))}
             <div className={style.all}>
@@ -53,4 +53,6 @@ export default function Cart() {
             </div>
         </div>
     );
-}
+});
+
+export default Cart;

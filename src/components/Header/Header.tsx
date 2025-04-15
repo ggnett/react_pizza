@@ -7,7 +7,7 @@ import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/se
 import { selectCart } from '../../redux/slices/cartSlice';
 import { useLocation } from 'react-router';
 
-export default function Header() {
+const Header = React.memo( function Header() {
     const dispatch = useDispatch();
     const { totalCost, totalCount } = useSelector(selectCart);
     const location = useLocation();
@@ -67,4 +67,5 @@ export default function Header() {
             </div>
         </div>
     );
-}
+})
+export default Header
