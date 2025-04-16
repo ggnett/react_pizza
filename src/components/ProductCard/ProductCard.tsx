@@ -49,7 +49,6 @@ export default function ProductCard({ id, title, imageUrl, price, types, sizes }
         } else {
             dispatch(addItemToCart(obj));
             dispatch(plusIdVnut());
-            console.log(obj);
         }
         dispatch(addTotalCost(price));
     };

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { getLocalStorageCost, getLocalStorageCount, getLocalStorageItems } from '../../utils/functionLocalStorage';
 
 export type itemsType = {
     id:string,
@@ -23,9 +24,9 @@ interface cartSliceInt {
 
 
 const initialState:cartSliceInt = {
-    items: [],
-    totalCost: 0,
-    totalCount: 0,
+    items: getLocalStorageItems(),
+    totalCost: getLocalStorageCost(),
+    totalCount: getLocalStorageCount(),
     idVnut: 0,
 };
 
