@@ -15,7 +15,7 @@ import { AppDispatch, RootState } from '../../redux/store';
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 export default function Content() {
-    const search = useSelector((state: RootState) => state.search);
+    const search:any = useSelector((state: RootState) => state.search);
     const items = useSelector((state: RootState) => state.pizza.items);
     const isLoading = useSelector((state: RootState) => state.pizza.isLoading);
 
