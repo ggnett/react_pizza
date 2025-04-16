@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Skeleton from '../Skeleton/Skeleton';
-import FetchError from '../FetchError/FetchError'
+import FetchError from '../FetchError/FetchError';
 
 import './Content.scss';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,10 +12,12 @@ import { sortUpd, catSortUpd, filterUpd, pagIndUpd } from '../../redux/slices/se
 import { addItems, fetchPizzaByUrl } from '../../redux/slices/pizzaSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+
 export default function Content() {
-    const search = useSelector((state:RootState) => state.search);
-    const items = useSelector((state:RootState) => state.pizza.items);
-    const isLoading = useSelector((state:RootState) => state.pizza.isLoading);
+    const search = useSelector((state: RootState) => state.search);
+    const items = useSelector((state: RootState) => state.pizza.items);
+    const isLoading = useSelector((state: RootState) => state.pizza.isLoading);
 
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
@@ -75,12 +77,12 @@ export default function Content() {
     return (
         <>
             <div className="content">
-                <p className="title">Все пиццы</p>
+                <p className="title">{categories[Number(search.catSort.substring(10))]} пиццы </p>
                 <div className="cardPlace">
                     {isLoading === 'pending' ? (
                         [...new Array(8)].map((_, index) => <Skeleton key={index} />)
                     ) : isLoading === 'resolve' ? (
-                        items.map((item:any, index:number) => <ProductCard key={index} {...item} />)
+                        items.map((item: any, index: number) => <ProductCard key={index} {...item} />)
                     ) : (
                         <FetchError />
                     )}
