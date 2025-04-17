@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ProductCard from '../ProductCard/ProductCard';
+import {ProductCard} from '../index'
 import Skeleton from '../Skeleton/Skeleton';
 import FetchError from '../FetchError/FetchError';
 
